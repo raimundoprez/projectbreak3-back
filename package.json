@@ -1,0 +1,24 @@
+{
+  "name": "projectbreak3-back",
+  "version": "1.0.0",
+  "description": "Una aplicación web para la gestión y seguimiento de la realización de tareas cotidianas de personas mayores. Parte back de la aplicación con Node.js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "watch": "node --watch src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raimundoprez/projectbreak3-back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raimundoprez/projectbreak3-back/issues"
+  },
+  "homepage": "https://github.com/raimundoprez/projectbreak3-back#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
