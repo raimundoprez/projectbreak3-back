@@ -1,5 +1,5 @@
 function getAllChores(_, res) {
-    res.json();
+    res.json({});
 }
 
 module.exports = {getAllChores};
