@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
+const choreRoutes = require("./routes/choreRoutes.js");
+
 const dbConnect = require("./config/db.js");
 const firebaseInit = require("./config/firebase.js");
 
@@ -17,5 +19,8 @@ app.use(cors());
 
 // habilitar procesamiento de JSON
 app.use(express.json());
+
+// añadir ruta de actividades
+app.use("/api", choreRoutes);
 
 module.exports = app;
