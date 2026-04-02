@@ -6,11 +6,17 @@ const maxRange = 30;
 function formatDate(date) {
     if (typeof date !== "string") return null;
 
-    const newDate = new Date(date);
-    if (isNaN(newDate)) return null;
+    const localDate = new Date(date);
+    if (isNaN(localDate)) return null;
 
-    newDate.setHours(0, 0, 0, 0);
-    return newDate;
+    const utcDate = new Date(Date.UTC(
+        localDate.getFullYear(),
+        localDate.getMonth(),
+        localDate.getDate(),
+        0, 0, 0, 0
+    ));
+
+    return utcDate;
 }
 
 function formatDateArray(dates) {
