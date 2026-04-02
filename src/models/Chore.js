@@ -62,4 +62,4 @@ choreSchema.pre("validate", function(next) {
 });
 
 const Chore = mongoose.model("Chore", choreSchema);
-module.exports = Chore;
+module.exports = {categories, Chore};

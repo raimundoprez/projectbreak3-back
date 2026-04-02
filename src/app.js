@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const swaggerUI = require("swagger-ui-express");
 
 const choreRoutes = require("./routes/choreRoutes.js");
+const docs = require("./docs");
 
 const dbConnect = require("./config/db.js");
 const firebaseInit = require("./config/firebase.js");
@@ -22,5 +24,8 @@ app.use(express.json());
 
 // añadir ruta de actividades
 app.use("/api", choreRoutes);
+
+// añadir ruta de la documentación
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(docs));
 
 module.exports = app;

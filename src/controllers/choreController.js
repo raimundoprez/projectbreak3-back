@@ -1,4 +1,4 @@
-const Chore = require("../models/Chore.js");
+const {Chore} = require("../models/Chore.js");
 
 // lee una request, obtiene un objeto chore mandado por el usuario (sin completedDays), valida las keys y lo devuelve
 function getChoreParams(req, res) {
@@ -136,7 +136,7 @@ async function addCompletedDay(req, res) {
                 chore.completedDays.sort((a, b) => a - b);
 
                 await chore.save();
-                res.json(chore.completedDays);
+                res.status(201).json(chore.completedDays);
             }
         }
     }
