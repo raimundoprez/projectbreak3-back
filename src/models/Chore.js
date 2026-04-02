@@ -28,10 +28,10 @@ const choreSchema = new mongoose.Schema({
     userId: {type: String, minLength: 1, maxLength: 200, required: true, index: true},
     name: {type: String, minLength: 1, maxLength: 100, required: true, trim: true},
     category: {type: String, enum: categories, required: true},
-    duration: {type: Number, min: 1, required: true, validate: [Number.isInteger, "{VALUE} is not an integer"]},
+    duration: {type: Number, min: 1, required: true, validate: [Number.isInteger, "{VALUE} no es un entero"]},
     startDate: {type: Date, required: true, set: formatDate},
     endDate: {type: Date, required: true, set: formatDate},
-    completedDays: {type: [Date], default: [], set: formatDateArray}
+    completedDays: {type: [{type: Date, required: true}], required: true, default: [], set: formatDateArray}
 },
 {
     timestamps: true
@@ -43,14 +43,14 @@ choreSchema.pre("validate", function(next) {
         const diffDays = diffMs / (1000 * 60 * 60 * 24);
 
         if (diffDays < 0)
-            next(new Error("End date must be greater than start date"));
+            next(new Error("La fecha final debe ser mayor o igual que la inicial"));
         else if (diffDays > maxRange)
-            next(new Error(`End date can't be more than ${maxRange} day(s) after start date`));
+            next(new Error(`La fecha final no puede exceder los ${maxRange} día(s) desde la fecha inicial`));
         else {
             const inRange = this.completedDays.every((date) => date >= this.startDate && date <= this.endDate);
 
             if (!inRange)
-                next(new Error("Some days are out of range"));
+                next(new Error("Algunos días están fuera de rango"));
             else
                 next();
         }

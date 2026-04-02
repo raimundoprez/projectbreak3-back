@@ -2,7 +2,7 @@ function validateDate(req, res, next) {
     const localDate = new Date(req.params.date);
 
     if (isNaN(localDate)) {
-        res.status(400).json({error: "Invalid date format"});
+        res.status(400).json({error: "Formato de fecha inválido"});
     }
     else {
         req.params.date = new Date(Date.UTC(

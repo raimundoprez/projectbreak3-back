@@ -5,7 +5,7 @@ async function auth(req, res, next) {
         const authHeader = req.headers.authorization;
 
         if (!authHeader || !authHeader.startsWith("Bearer ")) {
-            res.status(401).json({error: "No authorization token provided"});
+            res.status(401).json({error: "No se ha proporcionado un token de autorización"});
         }
         else {
             const idToken = authHeader.split(" ")[1];
@@ -17,7 +17,7 @@ async function auth(req, res, next) {
     }
     catch(error) {
         console.error("Error en auth middleware", error);
-        res.status(401).json({error: "Invalid or expired token"});
+        res.status(401).json({error: "El token ha expirado o no es válido"});
     }
 }
 

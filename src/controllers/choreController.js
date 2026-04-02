@@ -28,7 +28,7 @@ async function getAllChores(req, res) {
     }
     catch(error) {
         console.error("Error obteniendo la lista de chores", error);
-        res.status(500).json({error: "Error obtaining the chore list"});
+        res.status(500).json({error: "Error obteniendo la lista de chores"});
     }
 }
 
@@ -40,13 +40,13 @@ async function getChore(req, res) {
         const chore = await Chore.findOne({_id: id, userId: res.locals.userId});
 
         if (!chore)
-            res.status(404).json({error: "Chore not found"});
+            res.status(404).json({error: "Chore no encontrada"});
         else
             res.json(chore);
     }
     catch(error) {
         console.error(`Error obteniendo la chore ${id}`, error);
-        res.status(500).json({error: "Error obtaining the chore"});
+        res.status(500).json({error: "Error obteniendo la chore"});
     }
 }
 
@@ -61,11 +61,11 @@ async function createChore(req, res) {
         }
         catch(error) {
             console.error(`Error al crear una chore con los parámetros: ${JSON.stringify(params)}`, error);
-            res.status(500).json({error: "Failed to create the chore"});
+            res.status(500).json({error: "Error al crear la chore"});
         }
     }
     else {
-        res.status(400).json({error: "An invalid object was received"});
+        res.status(400).json({error: "Se han recibido datos incorrectos"});
     }
 }
 
@@ -79,7 +79,7 @@ async function updateChore(req, res) {
             const chore = await Chore.findOne({_id: id, userId: res.locals.userId});
 
             if (!chore) {
-                res.status(404).json({error: "Chore not found"});
+                res.status(404).json({error: "Chore no encontrada"});
             }
             else {
                 Object.assign(chore, params);
@@ -90,14 +90,15 @@ async function updateChore(req, res) {
         }
         catch(error) {
             console.error(`Error al actualizar la chore ${id} con los parámetros: ${JSON.stringify(params)}`, error);
-            res.status(500).json({error: "Failed to update the chore"});
+            res.status(500).json({error: "Error al actualizar la chore"});
         }
     }
     else {
-        res.status(400).json({error: "An invalid object was received"});
+        res.status(400).json({error: "Se han recibido datos incorrectos"});
     }
 }
 
+// borra una chore (debe pertenecer al usuario)
 async function deleteChore(req, res) {
     const id = req.params.id;
 
@@ -105,16 +106,17 @@ async function deleteChore(req, res) {
         const chore = await Chore.findOneAndDelete({_id: id, userId: res.locals.userId});
         
         if (!chore)
-            res.status(404).json({error: "Chore not found"});
+            res.status(404).json({error: "Chore no encontrada"});
         else
             res.json(chore);
     }
     catch(error) {
         console.error(`Error al borrar la chore ${id}`, error);
-        res.status(500).json({error: "Error deleting the chore"})
+        res.status(500).json({error: "Error al borrar la chore"});
     }
 }
 
+// añade un día a la lista de días completados
 async function addCompletedDay(req, res) {
     const id = req.params.id;
     const date = req.params.date;
@@ -123,11 +125,11 @@ async function addCompletedDay(req, res) {
         const chore = await Chore.findOne({_id: id, userId: res.locals.userId});
 
         if (!chore) {
-            res.status(404).json({error: "Chore not found"});
+            res.status(404).json({error: "Chore no encontrada"});
         }
         else {
             if (chore.completedDays.some((day) => day.getTime() === date.getTime())) {
-                res.status(400).json({error: "The date provided already exists in the completed days list"});
+                res.status(400).json({error: "La fecha proporcionada ya existe en la lista de días completados"});
             }
             else {
                 chore.completedDays.push(date);
@@ -140,10 +142,11 @@ async function addCompletedDay(req, res) {
     }
     catch(error) {
         console.error(`Error al añadir a la chore ${id} el día ${date}`, error);
-        res.status(500).json({error: "Failed to add the day to the chore"});
+        res.status(500).json({error: "Error al añadir el día a la chore"});
     }
 }
 
+// borra un día de la lista de días completados
 async function removeCompletedDay(req, res) {
     const id = req.params.id;
     const date = req.params.date;
@@ -152,13 +155,13 @@ async function removeCompletedDay(req, res) {
         const chore = await Chore.findOne({_id: id, userId: res.locals.userId});
 
         if (!chore) {
-            res.status(404).json({error: "Chore not found"});
+            res.status(404).json({error: "Chore no encontrada"});
         }
         else {
             const newCompleted = chore.completedDays.filter((day) => day.getTime() !== date.getTime());
 
             if (newCompleted.length === chore.completedDays.length) {
-                res.status(400).json({error: "The date provided doesn't exist in the completed days list"});
+                res.status(400).json({error: "La fecha proporcionada no existe en la lista de días completados"});
             }
             else {
                 chore.completedDays = newCompleted;
@@ -170,7 +173,7 @@ async function removeCompletedDay(req, res) {
     }
     catch(error) {
         console.error(`Error al borrar de la chore ${id} el día ${date}`, error);
-        res.status(500).json({error: "Failed to remove the day from the chore"});
+        res.status(500).json({error: "Error al borrar el día de la chore"});
     }
 }
 
