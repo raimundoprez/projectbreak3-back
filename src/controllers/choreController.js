@@ -33,17 +33,12 @@ async function getChore(req, res) {
     const id = req.params.id;
 
     try {
-        const chore = await Chore.findById(id);
+        const chore = await Chore.findOne({_id: id, userId: res.locals.userId});
 
-        if (!chore) {
+        if (!chore)
             res.status(404).json({error: "Chore not found"});
-        }
-        else {
-            if (chore.userId !== res.locals.userId)
-                res.status(401).json({error: "This chore doesn't belong to the user"});
-            else
-                res.json(chore);
-        }
+        else
+            res.json(chore);
     }
     catch(error) {
         console.error(`Error obteniendo la chore ${id}`, error);
