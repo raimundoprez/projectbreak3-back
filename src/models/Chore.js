@@ -4,13 +4,13 @@ const categories = ["Hogar", "Salud", "Trabajo", "Estudio", "Otro"];
 const maxRange = 30;
 
 function formatDate(date) {
-    if (date instanceof Date && !isNaN(date)) {
-        const newDate = new Date(date);
-        newDate.setHours(0, 0, 0, 0);
-        return newDate;
-    }
+    if (typeof date !== "string") return null;
 
-    return null;
+    const newDate = new Date(date);
+    if (isNaN(newDate)) return null;
+
+    newDate.setHours(0, 0, 0, 0);
+    return newDate;
 }
 
 function formatDateArray(dates) {
