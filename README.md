@@ -1,6 +1,8 @@
 # Gestor de tareas cotidianas
 Una aplicación web para la gestión y seguimiento de la realización de tareas cotidianas de personas mayores. Parte back de la aplicación con Node.js.
 
+![Captura de pantalla de la documentación del proyecto con Swagger](images/doc.png)
+
 ## Descripción
 Se ha diseñado una API tipo CRUD de tareas cotidianas, también conocidas como chores en inglés, que puede utilizarse para gestionar dichas tareas. Una chore se compone de:
 - ID: Identificador de la chore en base de datos.
