@@ -40,7 +40,7 @@ module.exports = {
                     },
                     name: {
                         type: "string",
-                        description: "Nombre descriptivo para una chore",
+                        description: "Nombre único descriptivo para una chore",
                         minLength: Chore.schema.path("name").validators.find(v => v.type === "minlength")?.minlength,
                         maxLength: Chore.schema.path("name").validators.find(v => v.type === "maxlength")?.maxlength,
                         examples: "Hacer la compra"

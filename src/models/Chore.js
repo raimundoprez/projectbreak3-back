@@ -37,6 +37,9 @@ const choreSchema = new mongoose.Schema({
     timestamps: true
 });
 
+// a user can't have two chores with the same ID
+choreSchema.index({userId: 1, name: 1}, {unique: true});
+
 choreSchema.pre("validate", function(next) {
     if (this.startDate && this.endDate && this.completedDays && this.completedDays.every((date) => date !== null)) {
         const diffMs = this.endDate - this.startDate;

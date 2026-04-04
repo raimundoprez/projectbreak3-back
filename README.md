@@ -7,7 +7,7 @@ Una aplicación web para la gestión y seguimiento de la realización de tareas 
 Se ha diseñado una API tipo CRUD de tareas cotidianas, también conocidas como chores en inglés, que puede utilizarse para gestionar dichas tareas. Una chore se compone de:
 - ID: Identificador de la chore en base de datos.
 - userId: Identificador del usuario al que pertenece la chore.
-- name: Nombre descriptivo de la chore.
+- name: Nombre descriptivo de la chore (sin repetir).
 - category: Categoría única de la chore.
 - duration: El tiempo diario estimado que se tarda en completar la chore en minutos.
 - startDate: Fecha en la que comenzó a realizarse la chore.
