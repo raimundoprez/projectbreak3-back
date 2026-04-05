@@ -41,5 +41,5 @@ Se ha diseñado una API tipo CRUD de tareas cotidianas, también conocidas como 
 
 ## Versión de prueba y documentación
 En los siguientes enlaces se proporcionan una versión de prueba del backend y una documentación más completa de los endpoint mediante Swagger. Si se hostea la aplicación, la documentación será accesible desde el endpoint `/api-docs`.
-- LINK_PROYECTO
-- LINK_DOC
+- [Proyecto de prueba (endpoints en /api)](https://projectbreak3-back.onrender.com/)
+- [Documentación en el proyecto de prueba](https://projectbreak3-back.onrender.com/api-docs/)
