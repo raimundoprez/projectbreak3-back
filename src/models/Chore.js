@@ -4,6 +4,7 @@ const categories = ["Hogar", "Salud", "Trabajo", "Estudio", "Otro"];
 const maxRange = 30;
 
 function formatDate(date) {
+    if (date instanceof Date) return date;
     if (typeof date !== "string") return null;
 
     const localDate = new Date(date);
@@ -40,27 +41,20 @@ const choreSchema = new mongoose.Schema({
 // a user can't have two chores with the same ID
 choreSchema.index({userId: 1, name: 1}, {unique: true});
 
-choreSchema.pre("validate", function(next) {
+// como estos campos son required, las validaciones por defecto no dejarán guardar si no se entra en el if
+choreSchema.pre("validate", function() {
     if (this.startDate && this.endDate && this.completedDays && this.completedDays.every((date) => date !== null)) {
         const diffMs = this.endDate - this.startDate;
         const diffDays = diffMs / (1000 * 60 * 60 * 24);
 
         if (diffDays < 0)
-            next(new Error("La fecha final debe ser mayor o igual que la inicial"));
+            throw new Error("La fecha final debe ser mayor o igual que la inicial");
         else if (diffDays > maxRange)
-            next(new Error(`La fecha final no puede exceder los ${maxRange} día(s) desde la fecha inicial`));
+            throw new Error(`La fecha final no puede exceder los ${maxRange} día(s) desde la fecha inicial`);
         else {
             const inRange = this.completedDays.every((date) => date >= this.startDate && date <= this.endDate);
-
-            if (!inRange)
-                next(new Error("Algunos días están fuera de rango"));
-            else
-                next();
+            if (!inRange) throw new Error("Algunos días están fuera de rango");
         }
-    }
-    else {
-        // como estos campos son required, las validaciones por defecto no dejarán guardar
-        next();
     }
 });
 
