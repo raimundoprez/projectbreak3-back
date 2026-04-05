@@ -15,7 +15,6 @@ Se ha diseñado una API tipo CRUD de tareas cotidianas, también conocidas como 
 - completedDays: Un array de fechas que funciona como una checklist de días en los que la chore ha sido realizada.
 
 ## Instalación y ejecución
-
 - Obtener un `.env` válido o crear uno propio partiendo de `.env.example`.
 - Instalar todos los paquetes necesarios con el comando: `npm install`.
 - Arrancar la aplicación con `npm start`.
@@ -32,7 +31,6 @@ Se ha diseñado una API tipo CRUD de tareas cotidianas, también conocidas como 
 - firebase-admin: Interfaz para interactuar con Firebase y validar tokens de acceso.
 
 ## Rutas
-
 - `GET /api/chore`: Obtiene todas las chores de un usuario.
 - `GET /api/chore/{id}`: Obtiene una chore de un usuario por su ID.
 - `POST /api/chore`: Crea una nueva chore para un usuario.
@@ -42,7 +40,6 @@ Se ha diseñado una API tipo CRUD de tareas cotidianas, también conocidas como 
 - `DELETE /api/chore/{id}/completedDays/{date}`: Borra una fecha del array de días completados de una chore.
 
 ## Versión de prueba y documentación
-
 En los siguientes enlaces se proporcionan una versión de prueba del backend y una documentación más completa de los endpoint mediante Swagger. Si se hostea la aplicación, la documentación será accesible desde el endpoint `/api-docs`.
 - LINK_PROYECTO
 - LINK_DOC
